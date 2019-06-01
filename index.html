@@ -19,11 +19,22 @@
 
             </div>
         </div>
-
-
-        <div class="row">
+        <div class="row" id="battle-screen">
+            <div class="col-sm-6" id="player-spot"></div>
+            <div class="col-sm-6" id="enemy-spot"></div>
+        </div>
+        <div class="row" id="fight-button">
             <div class="col-sm-12">
-                <button id="accept-btn" value="choice" type="button"><span id ="start-btn">Accept</span></button>
+                <button type="button" class="btn btn-outline-danger btn-lg" id="fight-button"><strong>Fight</strong></button>
+            </div>
+        </div>
+
+
+
+        <div class="row" id="select-buttons">
+            <div class="col-sm-12">
+                <button id="accept-btn" value="choice" type="button"><span id ="accept-btn">Accept</span></button>
+                <button id="start-btn" value="start" type="button"><span id ="start-btn">Start</span></button>
             </div>
         </div>
 

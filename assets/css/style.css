@@ -1,9 +1,21 @@
 .characterImages {
-    height:100px;
-    widows:100px;
+    height: 134px;
+    width: 172px;
+
 }
 
 .characterButtons {
     height:70px;
     width:70px;
+}
+
+.battle-pic {
+    height: 335px;
+    width: 540px;
+}
+
+#fight-btn{
+    position: absolute;
+    left:545px;
+    top:40px;
 }
