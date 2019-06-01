@@ -124,10 +124,10 @@ $("#start-btn").on("click", function(){
     $("#fight-button").on("click", function(){
         var damage = playerHealth - enemyPower;
         playerHealth = damage;
-        $("#player-bar").attr('aria-valuenow', playerHealth).css('width', playerHealth);
+        $("#player-bar").attr('aria-valuenow', playerHealth).css('width', (playerHealth/playerCharacter.Health) * 100  + "%");
         var attack = enemyHealth - playerPower;
         enemyHealth = attack;
-        $("#enemy-bar").attr('aria-valuenow', enemyHealth).css('width', enemyHealth);
+        $("#enemy-bar").attr('aria-valuenow', enemyHealth).css('width', (enemyHealth/enemyCharacter.Health) * 100  + "%");
         console.log(damage);
         console.log(attack);
         
