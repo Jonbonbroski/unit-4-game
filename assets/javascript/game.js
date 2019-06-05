@@ -1,21 +1,43 @@
-var characterImages = ["assets/images/ajani.jpg", "assets/images/chandra.jpg", "assets/images/liliana.jpg"];
-var characterPics = ["assets/images/ajani.jpg", "assets/images/chandra.jpg", "assets/images/liliana.jpg"];
+var characterImages = ["assets/images/ajani.jpg", "assets/images/chandra.jpg", "assets/images/liliana.jpg","assets/images/jace.jpg","assets/images/karn.jpg","assets/images/nissa.jpg", "assets/images/serra.jpg"];
+var characterPics = ["assets/images/ajani.jpg", "assets/images/chandra.jpg", "assets/images/liliana.jpg", "assets/images/jace.jpg", "assets/images/karn.jpg", "assets/images/nissa.jpg", "assets/images/serra.jpg"];
+
 var ajani = {Name: "Ajani",
              Power: 5,
              Health: 150
 };
 var chandra =  {Name: "Chandra",
                 Power: 7,
-                Health:120
+                Health:120,
 };
 var liliana = { Name: "Liliana",
                 Power: 6,
                 Health:100,
 };
 
+var jace = { Name: "Jace",
+             Power: 7,
+             Health:100,
+};
+
+var karn = { Name: "Karn",
+             Power:11,
+             Health:90,    
+};
+
+var nissa = { Name: "Nissa",
+              Power:9,
+              Health:110,
+};
+
+var serra = { Name: "Serra",
+              Power:10,
+              Health:110,
+};
+
+
 //var characters and buttonVal help link selection to object from radio buttons. 
-var characters = [ajani, chandra, liliana];
-var buttonVal = ["Ajani","Chandra","Liliana"];
+var characters = [ajani, chandra, liliana, jace, karn, nissa, serra];
+var buttonVal = ["Ajani","Chandra","Liliana", "Jace", "Karn", "Nissa","Serra"];
 var playerChoice;
 var enemyChoice;
 
@@ -35,7 +57,10 @@ var enemyHealth;
 var enemyPower;
 //Loads character images,name and stats in html and links classes.
 
-$("#character-selection").ready(function(){
+$("#character-selection").ready(charSelect());
+    
+    
+function charSelect(){
     $("#battle-screen").hide();
     $("#fight-button").hide();
 
@@ -58,7 +83,7 @@ $("#character-selection").ready(function(){
         console.log(charHealth);
     };
     
-});
+};
 
 //Function for selecting the chatactes using the radio buttons.
 // if/else statements to prevent same character being selected.
@@ -79,6 +104,21 @@ $("#accept-btn").on("click", function(){
 }};
 
 });
+
+//function to loop to be called later if player wins. Preventing
+//defeted characters from being chosen again. 
+
+function charRemoval(){
+
+    for(j = 0; j < killedCharacters.length; j++){
+
+        deadChar = document.getElementById(killedCharacters[j]);
+        $(deadChar).remove();
+        
+    }
+
+};
+
 
 
 //Function that starts the battle.
@@ -104,6 +144,7 @@ $("#start-btn").on("click", function(){
 //Hides HTML for character selection and makes battle screen. 
     
         $("#character-select").hide();
+        $("#character-select").empty();
         $("#select-buttons").hide();
         $("#battle-screen").show();
         $("#player-spot").append(playerImage);
@@ -119,8 +160,14 @@ $("#start-btn").on("click", function(){
     enemyPower = enemyCharacter.Power;
 
 
+
 //onClick fight button that does damage and reflects on progress bars.
 
+   if(enemyHealth <= 0){
+       alert("You won the battle.");
+   }if(playerHealth <= 0){
+       alert("You have lost.");
+   }
     $("#fight-button").on("click", function(){
         var damage = playerHealth - enemyPower;
         playerHealth = damage;
@@ -130,13 +177,28 @@ $("#start-btn").on("click", function(){
         $("#enemy-bar").attr('aria-valuenow', enemyHealth).css('width', (enemyHealth/enemyCharacter.Health) * 100  + "%");
         console.log(damage);
         console.log(attack);
-        
+        playerPower = playerPower * 2;
+        if(enemyHealth <= 0){
+            alert("You won the battle.");
+            $("#fight-button").empty();
+            $("#battle-screen").empty();
+            $("#character-select").show();
+            $("#select-buttons").show();
+            $("#character-select").empty();
+            charSelect();
+            enemyCharacter = undefined;
+          /*  killedCharacters.push(enemyCharacter)
+            enemyCharacter = undefined;
+            playerCharacter = playerCharacter;
+            charRemoval();
+            $("#character-select").show();
+            $("#select-buttons").show(); */
 
+        }if(playerHealth <= 0){
+            alert("You Lost!");
+        };
 
     });
-
-
-
 
 
 
